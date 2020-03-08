@@ -1,8 +1,10 @@
-# Simple React Countdown Timer
-
 ### <p align="center"><img width="100%" src="https://raw.githubusercontent.com/uidoyen/countdown-timer/master/src/Screenshot.png"></p>
 
+# Simple React Countdown Timer
+
 A simple ​countdown timer application build with React JS.
+
+# [Demo](https://uidoyen-countdown-timer.surge.sh/)
 
 ## Installation
 
