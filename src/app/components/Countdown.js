@@ -125,9 +125,11 @@ class Countdown extends Component {
   };
 
   componentDidMount = () => {
-    let previousState = JSON.parse(localStorage.getItem('timerStart'));
-    if (previousState.timerStart > 0) {
-      this.reStartTimer();
+    if (localStorage.getItem('timerStart') !== null) {
+      let previousState = JSON.parse(localStorage.getItem('timerStart'));
+      if (previousState.timerStart > 0) {
+        this.reStartTimer();
+      }
     }
 
     document.addEventListener('keydown', this.maintainLaps, false);
@@ -145,12 +147,14 @@ class Countdown extends Component {
 
   // Restart timer
   reStartTimer = () => {
-    let previousState = JSON.parse(localStorage.getItem('timerStart'));
-    this.setState({
-      timerOn: true,
-      timerStart: previousState.timerStart,
-      timerTime: previousState.timerTime
-    });
+    if (localStorage.getItem('timerStart') !== null) {
+      let previousState = JSON.parse(localStorage.getItem('timerStart'));
+      this.setState({
+        timerOn: true,
+        timerStart: previousState.timerStart,
+        timerTime: previousState.timerTime
+      });
+    }
 
     this.timer = setInterval(() => {
       const newTime = this.state.timerTime - 10;
