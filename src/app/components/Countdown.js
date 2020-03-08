@@ -11,15 +11,19 @@ class Countdown extends Component {
     status: ''
   };
 
+  // Set count down time
   adjustTimer = input => {
     const { timerTime, timerOn } = this.state;
-    const max = 216000000;
-
+    const max = 216000000; //216000000 Milliseconds = 60 hours
     if (!timerOn) {
       if (input === 'incHours' && timerTime + 3600000 < max) {
-        this.setState({ timerTime: timerTime + 3600000 });
+        this.setState({
+          timerTime: timerTime + 3600000
+        });
       } else if (input === 'decHours' && timerTime - 3600000 >= 0) {
-        this.setState({ timerTime: timerTime - 3600000 });
+        this.setState({
+          timerTime: timerTime - 3600000
+        });
       } else if (input === 'incMinutes' && timerTime + 60000 < max) {
         this.setState({ timerTime: timerTime + 60000 });
       } else if (input === 'decMinutes' && timerTime - 60000 >= 0) {
@@ -28,18 +32,20 @@ class Countdown extends Component {
         this.setState({ timerTime: timerTime + 1000 });
       } else if (input === 'decSeconds' && timerTime - 1000 >= 0) {
         this.setState({ timerTime: timerTime - 1000 });
-      } else if (input === 'incMSeconds' && timerTime + 1000 < max) {
-        this.setState({ timerTime: timerTime + 1000 });
-      } else if (input === 'decMSeconds' && timerTime - 1000 >= 0) {
-        this.setState({ timerTime: timerTime - 1000 });
+      } else if (input === 'incMSeconds' && timerTime + 10 < max) {
+        this.setState({ timerTime: timerTime + 10 });
+      } else if (input === 'decMSeconds' && timerTime - 10 >= 0) {
+        this.setState({ timerTime: timerTime - 10 });
       }
     }
+
     //clear counter status message
     this.setState({
       status: ''
     });
   };
 
+  // Start count down
   startTimer = () => {
     this.setState({
       timerOn: true,
@@ -67,11 +73,13 @@ class Countdown extends Component {
     }, 10);
   };
 
+  // Pause timer
   pauseTimer = () => {
     clearInterval(this.timer);
     this.setState({ timerOn: false });
   };
 
+  // Stop timer
   stopTimer = () => {
     this.setState({
       timerOn: false,
@@ -81,9 +89,10 @@ class Countdown extends Component {
     clearInterval(this.timer);
   };
 
+  // Handle Lapse
   maintainLaps = event => {
     const { timerOn } = this.state;
-    // Event triggered by pressing space
+    // Event triggered by pressing space key
     if (event.keyCode === 32 && timerOn === true) {
       const { timerTime, lapse } = this.state;
 
@@ -123,7 +132,6 @@ class Countdown extends Component {
 
     document.addEventListener('keydown', this.maintainLaps, false);
     window.addEventListener('beforeunload', this.handleTabClose);
-
     //clear counter status message
     this.setState({
       status: ''
@@ -135,6 +143,7 @@ class Countdown extends Component {
     window.removeEventListener('beforeunload', this.handleTabClose);
   };
 
+  // Restart timer
   reStartTimer = () => {
     let previousState = JSON.parse(localStorage.getItem('timerStart'));
     this.setState({
@@ -156,12 +165,14 @@ class Countdown extends Component {
     }, 10);
   };
 
+  //set current timer status to localstorage on tab close or refresh
   handleTabClose = () => {
     localStorage.setItem('timerStart', JSON.stringify(this.state));
   };
 
   render() {
     const { timerTime, timerStart, timerOn, lapse, status } = this.state;
+
     let centiseconds = ('0' + Math.floor((timerTime / 10) % 100)).slice(-2);
     let seconds = ('0' + (Math.floor((timerTime / 1000) % 60) % 60)).slice(-2);
     let minutes = ('0' + Math.floor((timerTime / 60000) % 60)).slice(-2);
@@ -249,7 +260,6 @@ class Countdown extends Component {
                 className="btn btn__default"
                 onClick={() => this.adjustTimer('incMSeconds')}
                 title="Click to increase"
-                disabled
               >
                 <IoMdArrowDropup size={32} />
               </button>
@@ -259,7 +269,6 @@ class Countdown extends Component {
             </div>
             <div>
               <button
-                disabled
                 className="btn btn__default"
                 onClick={() => this.adjustTimer('decMSeconds')}
                 title="Click to decrease"
