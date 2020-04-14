@@ -1,0 +1,176 @@
+@import 'resets/normalize.scss';
+@import 'resets/reset.local.scss';
+@import 'resets/typography.scss';
+
+body {
+  background-color: #232627;
+  color: #a1a1a1;
+  font-weight: 300;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.countdown {
+  background-color: #272b2c;
+  padding: 20px;
+  &__status {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__down {
+    display: flex;
+  }
+
+  &__header {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    padding: 0 100px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  &__desc {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 20px;
+    color: #49afee;
+  }
+  &__display {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    margin-bottom: 20px;
+  }
+
+  &__label {
+    font-size: 1.6rem;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #737373;
+  }
+
+  &__time {
+    font-size: 3.3rem;
+    margin: 0;
+    text-align: center;
+    border: 1px solid #393939;
+    padding: 8px 12px;
+  }
+}
+
+.ButtonAction {
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  border: solid 1px transparent;
+  border-radius: 0;
+  padding: 0 15px;
+  color: #ffffff;
+  font-size: 16px;
+  margin: 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  &__default {
+    background-color: #aeaaff;
+
+    &:hover {
+      background-color: #c8c6ff;
+    }
+  }
+
+  &__primary {
+    padding: 10px 30px;
+    background-color: #02ce00;
+    box-shadow: 0 3px #026d00;
+
+    &:hover {
+      background-color: #029e00;
+    }
+    &:disabled {
+      background-color: #ddd;
+      box-shadow: 0 3px rgb(145, 145, 145);
+    }
+  }
+}
+
+.timeLapse {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  border: 1px solid #393d3f;
+
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    margin-bottom: 10px;
+    background-color: #393d3f;
+    > div {
+      padding: 10px 20px;
+      flex: 1;
+      &:first-child {
+        color: white;
+      }
+    }
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    max-height: 150px;
+    overflow-y: scroll;
+  }
+  &__time {
+    font-weight: normal;
+    display: flex;
+    justify-content: space-between;
+    color: #a1a1a1;
+
+    > div {
+      padding: 5px 20px;
+      flex: 1;
+      &:first-child {
+        color: white;
+      }
+    }
+  }
+}
+
+.blinking {
+  animation: blinkingText 1.2s infinite;
+}
+
+@keyframes blinkingText {
+  0% {
+    color: #ff0000;
+  }
+  49% {
+    color: #ff0000;
+  }
+  60% {
+    color: transparent;
+  }
+  99% {
+    color: transparent;
+  }
+  100% {
+    color: #ff0000;
+  }
+}
